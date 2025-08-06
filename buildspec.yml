@@ -28,6 +28,6 @@ phases:
       - echo Pushing the Docker image to ECR...
       - docker push $REPO_URL:$IMAGE_TAG
       - echo Writing image definitions...
-      - printf '[{"name":"your-container-name","imageUri":"%s"}]' $REPO_URL:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"2048-container,"imageUri":"%s"}]' $REPO_URL:$IMAGE_TAG > imagedefinitions.json
 artifacts:
   files: imagedefinitions.json
