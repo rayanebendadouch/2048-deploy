@@ -1,5 +1,9 @@
 version: 0.2
 
+environment:
+  image: aws/codebuild/standard:7.0
+  privilegedMode: true
+
 env:
   variables:
     REPO_URL: 864899843815.dkr.ecr.us-east-1.amazonaws.com/2048-game
@@ -11,7 +15,7 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - $(aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin 864899843815.dkr.ecr.us-east-1.amazonaws.com)
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin 864899843815.dkr.ecr.us-east-1.amazonaws.com
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
 
